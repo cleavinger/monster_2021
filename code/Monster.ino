@@ -14,7 +14,7 @@ const int PIN_LASER = 7;     // Pin for laser eyes
 const int RELAY_LIGHT = 3;   //Pin for lightbulb
 const int RELAY_MOTOR = 4;   //Pin for DC Motor
 const int PIN_SOUND = 8;   //Pin for sound
-const int PIN_SENSOR = 12;   // Doppler Input Pin
+const int PIR_PIN = 12;   // PIR Input Pin
 
 String bt_command; //string for command from bluetooth
 
@@ -40,6 +40,8 @@ int runScene1 = 0;
 int runScene2 = 0;
 int runScene3 = 0;
 
+int pirStatus = 0;   // PIR Status
+bool Motion_Mode = false; // false = phone control only; true = motion trigger on
 
 void setup() {
   // put your setup code here, to run once:
@@ -49,6 +51,7 @@ void setup() {
   pinMode(PIN_LASER, OUTPUT);
   pinMode(RELAY_LIGHT, OUTPUT);
   pinMode(RELAY_MOTOR, OUTPUT);
+  pinMode(PIR_PIN, INPUT);
    
 
   /*Set everything to off*/
@@ -141,6 +144,12 @@ void loop() {
       startScene3();
       bt_command = " ";
     }
+
+    if(bt_command=="69"){//byte version of E
+      		Motion_Mode = !Motion_Mode;
+      		bt_command = " ";
+    }
+
   }
   
   /*run functions if active*/
@@ -158,7 +167,26 @@ void loop() {
 
   if(runScene2 == 1){scene2();}
   if(runScene3 == 1){scene3();}
+
+
+/*Motion detection*/
+  pirStatus = digitalRead(PIR_PIN); 
+  if(pirStatus == HIGH){Serial.println("Motion detected");}
+  if(Motion_Mode == true && pirStatus== HIGH){Serial.println("Motion mode on and motion detected");}
+  if(Motion_Mode == true 
+    && pirStatus == HIGH 
+    && runFan == 0
+    && runFog == 0
+    && runLaser == 0
+    && runLight == 0
+    && runMotor == 0
+    && runSound == 0
+    && runScene1 == 0 
+    && runScene2 == 0 
+    && runScene3 == 0){Serial.println("Motion mode on & motion detected & nothing else running"); startScene1();}
+
 }
+
 
 
 /* define start functions */
@@ -190,6 +218,9 @@ void stopAll(){
   runScene3 = 0; 
   Serial.println("Stop it all");
 }
+
+
+
 
 void FanSpin(){
   if((millis() - milStartFan) > 1050){digitalWrite(RELAY_FAN, HIGH); runFan = 0;} //OFF
