@@ -16,6 +16,7 @@ const int RELAY_MOTOR = 4;   //Pin for DC Motor
 const int PIN_SOUND = 8;   //Pin for sound
 const int PIR_PIN = 12;   // PIR Input Pin
 
+
 String bt_command; //string for command from bluetooth
 
 /*Setup times*/
@@ -42,6 +43,7 @@ int runScene3 = 0;
 
 int pirStatus = 0;   // PIR Status
 bool Motion_Mode = false; // false = phone control only; true = motion trigger on
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -147,11 +149,15 @@ void loop() {
 
     if(bt_command=="69"){//byte version of E
       		Motion_Mode = !Motion_Mode;
+          if(Motion_Mode == true){Serial.println("Motion mode on");}
+          else{Serial.println("Motion mode on");}
       		bt_command = " ";
     }
 
   }
-  
+
+
+
   /*run functions if active*/
   if(runFan == 1){FanSpin();}
   if(runFog == 1){FogMe();}
@@ -171,8 +177,8 @@ void loop() {
 
 /*Motion detection*/
   pirStatus = digitalRead(PIR_PIN); 
-  if(pirStatus == HIGH){Serial.println("Motion detected");}
-  if(Motion_Mode == true && pirStatus== HIGH){Serial.println("Motion mode on and motion detected");}
+  //if(pirStatus == HIGH){Serial.println("Motion detected");}
+  //if(Motion_Mode == true && pirStatus== HIGH){Serial.println("Motion mode on and motion detected");}
   if(Motion_Mode == true 
     && pirStatus == HIGH 
     && runFan == 0
@@ -197,11 +203,7 @@ void startLight(){runLight = 1; milStartLight = (millis() - 1); Serial.println("
 void startMotor(){runMotor = 1; milStartMotor = (millis() - 1); Serial.println("Shake that lid");}
 void startSound(){runSound = 1; milStartSound = (millis() - 1); Serial.println("Make some noise!");}
 
-void startScene1(){runScene1 = 1; runScene2 = 0; runScene3 = 0; milScene = (millis() - 1); milStartScene = (millis() - 1); Serial.println("Scene 1");
-  Serial.println(millis() - 1); 
-  Serial.println(milScene); 
-  Serial.println(milStartScene);}
-
+void startScene1(){runScene1 = 1; runScene2 = 0; runScene3 = 0; milStartScene = (millis() - 1); Serial.println("Scene 1");}
 void startScene2(){runScene1 = 0; runScene2 = 1; runScene3 = 0; milStartScene = (millis() - 1); Serial.println("Scene 2");}
 void startScene3(){runScene1 = 0; runScene2 = 0; runScene3 = 1; milStartScene = (millis() - 1); Serial.println("Scene 3");}
 
@@ -277,7 +279,7 @@ void LidFlap(){
 
 void MakeNoise(){
   if((millis() - milStartSound) > 6000){myDFPlayer.pause(); runSound = 0;} //Stop Sound
-  else if((millis() - milStartSound) > 0){myDFPlayer.playMp3Folder(3); Serial.println("song should be playing");} //Play Sound
+  else if((millis() - milStartSound) > 0){myDFPlayer.playMp3Folder(3); Serial.println("song should be playing");runSound=2;} //Play Sound runSound set to 2 so it won't keep restarting
   else{myDFPlayer.pause(); runSound = 0;} //Stop Sound
 }
 
@@ -293,17 +295,17 @@ Sound
 //Sound keeps restarting, need to only start if not started
 void scene1(){
   if((millis() - milStartScene) > 12000){Serial.println("Scene 1 Completed"); runScene1 = 0; stopAll(); } //OFF
-  else if((millis() - milStartScene) > 10500 ){Serial.println("6th pause");} // +1500
+  else if((millis() - milStartScene) > 10500 ){}//{Serial.println("6th pause");} // +1500
   else if((millis() - milStartScene) > 9500 ){startFan(); startMotor();}
-  else if((millis() - milStartScene) > 8500 ){Serial.println("5th pause");} // +1000
+  else if((millis() - milStartScene) > 8500 ){}//{Serial.println("5th pause");} // +1000
   else if((millis() - milStartScene) > 7500 ){startFog(); startMotor();}
-  else if((millis() - milStartScene) > 6000 ){Serial.println("4th pause");} // +1500
+  else if((millis() - milStartScene) > 6000 ){}//{Serial.println("4th pause");} // +1500
   else if((millis() - milStartScene) > 5000 ){startMotor();}
-  else if((millis() - milStartScene) > 4500 ){Serial.println("3rd pause");} // +500
+  else if((millis() - milStartScene) > 4500 ){}//{Serial.println("3rd pause");} // +500
   else if((millis() - milStartScene) > 3500 ){startMotor(); startFog(); startLaser(); startFan();} //
-  else if((millis() - milStartScene) > 2500 ){Serial.println("2nd pause");} // +1000
-  else if((millis() - milStartScene) > 1500){startMotor(); startSound();}
-  else if((millis() - milStartScene) > 1000 ){Serial.println("1st pause");} // +500
+  else if((millis() - milStartScene) > 2500 ){}//{Serial.println("2nd pause");} // +1000
+  else if((millis() - milStartScene) > 1500){startMotor();if(runSound==0){runSound=1;startSound();}else{};}
+  else if((millis() - milStartScene) > 1000 ){}//{Serial.println("1st pause");} // +500
   else if((millis() - milStartScene) > 0){startFog(); startMotor(); startLight();} //Fog, Lid, Flash
   else{Serial.println("else stop"); runScene1 = 0; stopAll();} //OFF
 }
