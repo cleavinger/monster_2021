@@ -1,20 +1,25 @@
 
+/*
+If not connecting to a computer, after powering on you need to reset the board with the button to get it to work.
+It appears to be an issue with the DFRobot mp3 player and SoftwareSerial.h
+*/
+
 #include "Arduino.h"
-#include "SoftwareSerial.h"
+#include "SoftwareSerial.h" //need this library for mp3 module communication
 #include "DFRobotDFPlayerMini.h"
 
 SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
-void printDetail(uint8_t type, int value);
+//void printDetail(uint8_t type, int value);
 
-
+/* Setting up Pins*/
 const int RELAY_FAN = 2;     //Pin for fan
 const int RELAY_FOG = 5;     //Pin for Fog machine remote
 const int PIN_LASER = 7;     // Pin for laser eyes
 const int RELAY_LIGHT = 3;   //Pin for lightbulb
 const int RELAY_MOTOR = 4;   //Pin for DC Motor
 const int PIN_SOUND = 8;   //Pin for sound
-const int PIR_PIN = 12;   // PIR Input Pin
+const int PIR_PIN = 12;   // PIR input Pin
 
 
 String bt_command; //string for command from bluetooth
@@ -29,8 +34,9 @@ unsigned long milStartMotor;
 unsigned long milStartSound;
 unsigned long milScene;
 unsigned long milStartScene;
+unsigned long milStartSleep;
 
-/*setup run variables*/
+/*setup run variables - lets loop know if it should trigger one of these*/
 int runFan = 0;
 int runFog = 0;
 int runLaser = 0;
@@ -40,8 +46,9 @@ int runSound = 0;
 int runScene1 = 0;
 int runScene2 = 0;
 int runScene3 = 0;
+int runSleep = 0;
 
-int pirStatus = 0;   // PIR Status
+int pirStatus = 0;   // PIR Status to read from digital pin
 bool Motion_Mode = false; // false = phone control only; true = motion trigger on
 
 
@@ -65,14 +72,14 @@ void setup() {
    
 
   bt_command == " "; //assign empty string
-  mySoftwareSerial.begin(9600); //serial for mp3
+  mySoftwareSerial.begin(9600); //serial for mp3 module
   Serial.begin(9600); //start the serial for bluetooth
 
 
   Serial.println(F("DFRobot DFPlayer Mini Demo"));
   Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
 
-  if (!myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3.
+  if (!myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3 module.
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
@@ -119,11 +126,6 @@ void loop() {
 
     if(bt_command=="54"){//byte version of 6
       startSound();
-      /*
-      delay(3000);
-      if (myDFPlayer.available()) {
-          printDetail(myDFPlayer.readType(), myDFPlayer.read()); //Print the detail message from DFPlayer to handle different errors and states.
-        }*/
       bt_command = " ";
     }      
 
@@ -133,16 +135,19 @@ void loop() {
     }   
 
     if(bt_command=="66"){//byte version of B
+      stopAll();
       startScene1();
       bt_command = " ";
     }      
 
     if(bt_command=="67"){//byte version of C
+      stopAll();
       startScene2();
       bt_command = " ";
     }
 
     if(bt_command=="68"){//byte version of D
+      stopAll();
       startScene3();
       bt_command = " ";
     }
@@ -150,8 +155,14 @@ void loop() {
     if(bt_command=="69"){//byte version of E
       		Motion_Mode = !Motion_Mode;
           if(Motion_Mode == true){Serial.println("Motion mode on");}
-          else{Serial.println("Motion mode on");}
+          else{Serial.println("Motion mode off");}
       		bt_command = " ";
+    }
+
+    if(bt_command=="70"){//byte version of F
+      stopAll();
+      startSleep();
+      bt_command = " ";
     }
 
   }
@@ -165,14 +176,10 @@ void loop() {
   if(runLight == 1){LightFlash();}
   if(runMotor == 1){LidFlap();}
   if(runSound == 1){MakeNoise();} //This isn't a trigger, we have to see how this works
-  if(runScene1 == 1){scene1();
-    Serial.println(millis()); 
-    Serial.println(milScene); 
-    Serial.println(milStartScene);
-    }
-
+  if(runScene1 == 1){scene1();}
   if(runScene2 == 1){scene2();}
   if(runScene3 == 1){scene3();}
+  if(runSleep == 1){Sleeper();}
 
 
 /*Motion detection*/
@@ -190,6 +197,18 @@ void loop() {
     && runScene1 == 0 
     && runScene2 == 0 
     && runScene3 == 0){Serial.println("Motion mode on & motion detected & nothing else running"); startScene1();}
+  else if(Motion_Mode == true 
+    && pirStatus == LOW 
+    && runFan == 0
+    && runFog == 0
+    && runLaser == 0
+    && runLight == 0
+    && runMotor == 0
+    && runSound == 0
+    && runSleep == 0
+    && runScene1 == 0 
+    && runScene2 == 0 
+    && runScene3 == 0){Serial.println("Go to sleeeeep"); startSleep();}
 
 }
 
@@ -203,9 +222,13 @@ void startLight(){runLight = 1; milStartLight = (millis() - 1); Serial.println("
 void startMotor(){runMotor = 1; milStartMotor = (millis() - 1); Serial.println("Shake that lid");}
 void startSound(){runSound = 1; milStartSound = (millis() - 1); Serial.println("Make some noise!");}
 
+void startSleep(){runSleep = 1; milStartSleep = (millis() - 1); Serial.println("Go to bed");}
+
 void startScene1(){runScene1 = 1; runScene2 = 0; runScene3 = 0; milStartScene = (millis() - 1); Serial.println("Scene 1");}
 void startScene2(){runScene1 = 0; runScene2 = 1; runScene3 = 0; milStartScene = (millis() - 1); Serial.println("Scene 2");}
 void startScene3(){runScene1 = 0; runScene2 = 0; runScene3 = 1; milStartScene = (millis() - 1); Serial.println("Scene 3");}
+
+
 
 /* define stop functions */
 void stopAll(){
@@ -217,7 +240,8 @@ void stopAll(){
   runSound = 0; myDFPlayer.pause();
   runScene1 = 0; 
   runScene2 = 0; 
-  runScene3 = 0; 
+  runScene3 = 0;
+  runSleep = 0; 
   Serial.println("Stop it all");
 }
 
@@ -283,13 +307,17 @@ void MakeNoise(){
   else{myDFPlayer.pause(); runSound = 0;} //Stop Sound
 }
 
+
+void Sleeper(){
+  if((millis() - milStartSleep) > 60000){Serial.println("Slept for awhile"); myDFPlayer.pause(); stopAll(); startFog(); startSleep();} //restart the sleeping sound
+  else if((millis() - milStartSleep) > 0){myDFPlayer.playMp3Folder(4); Serial.println("song should be playing");runSleep = 2;} //Play Sound runSound set to 2 so it won't keep restarting
+  else{Serial.println("else stop"); runSleep = 0; stopAll();} //OFF
+}
+
+
+
 /*
-Fan     1050
-Fog     500
-Lasers  5000
-Light   3500
-Motor   100
-Sound
+Creating the scenes
 */
 
 //Sound keeps restarting, need to only start if not started
@@ -344,61 +372,4 @@ void scene3(){
   else{stopAll(); runScene3 = 0;} //OFF
 }
 
-
-
-
-void printDetail(uint8_t type, int value){
-  switch (type) {
-    case TimeOut:
-      Serial.println(F("Time Out!"));
-      break;
-    case WrongStack:
-      Serial.println(F("Stack Wrong!"));
-      break;
-    case DFPlayerCardInserted:
-      Serial.println(F("Card Inserted!"));
-      break;
-    case DFPlayerCardRemoved:
-      Serial.println(F("Card Removed!"));
-      break;
-    case DFPlayerCardOnline:
-      Serial.println(F("Card Online!"));
-      break;
-    case DFPlayerPlayFinished:
-      Serial.print(F("Number:"));
-      Serial.print(value);
-      Serial.println(F(" Play Finished!"));
-      break;
-    case DFPlayerError:
-      Serial.print(F("DFPlayerError:"));
-      switch (value) {
-        case Busy:
-          Serial.println(F("Card not found"));
-          break;
-        case Sleeping:
-          Serial.println(F("Sleeping"));
-          break;
-        case SerialWrongStack:
-          Serial.println(F("Get Wrong Stack"));
-          break;
-        case CheckSumNotMatch:
-          Serial.println(F("Check Sum Not Match"));
-          break;
-        case FileIndexOut:
-          Serial.println(F("File Index Out of Bound"));
-          break;
-        case FileMismatch:
-          Serial.println(F("Cannot Find File"));
-          break;
-        case Advertise:
-          Serial.println(F("In Advertise"));
-          break;
-        default:
-          break;
-      }
-      break;
-    default:
-      break;
-  }
-}
 
