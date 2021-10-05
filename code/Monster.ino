@@ -8,18 +8,18 @@ It appears to be an issue with the DFRobot mp3 player and SoftwareSerial.h
 #include "SoftwareSerial.h" //need this library for mp3 module communication
 #include "DFRobotDFPlayerMini.h"
 
-SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
+SoftwareSerial mySoftwareSerial(8, 9); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
 //void printDetail(uint8_t type, int value);
 
 /* Setting up Pins*/
 const int RELAY_FAN = 2;     //Pin for fan
 const int RELAY_FOG = 5;     //Pin for Fog machine remote
-const int PIN_LASER = 7;     // Pin for laser eyes
+const int PIN_LASER = 6;     // Pin for laser eyes
 const int RELAY_LIGHT = 3;   //Pin for lightbulb
 const int RELAY_MOTOR = 4;   //Pin for DC Motor
-const int PIN_SOUND = 8;   //Pin for sound
-const int PIR_PIN = 12;   // PIR input Pin
+//const int PIN_SOUND = 8;   //Pin for sound
+const int PIR_PIN = 10;   // PIR input Pin
 
 
 String bt_command; //string for command from bluetooth
