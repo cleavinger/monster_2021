@@ -203,27 +203,27 @@ void loop() {
       bt_command = " ";
     }   
 
-    if(bt_command=="76"){//byte version of L BOO!
+    if(bt_command=="76"){//byte version of L Monster Growl!
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(10); //Serial.println("BOO! should be playing");
+      myDFPlayer.playMp3Folder(10); //Serial.println("Monster Growl should be playing");
       bt_command = " ";
     }   
 
-    if(bt_command=="77"){//byte version of M Scary 1
+    if(bt_command=="77"){//byte version of M Dog Growl
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(11); //Serial.println("Scary 1 should be playing");
+      myDFPlayer.playMp3Folder(11); //Serial.println("Dog Growl should be playing");
       bt_command = " ";
     } 
 
-    if(bt_command=="78"){//byte version of N Scary 2
+    if(bt_command=="78"){//byte version of N Fingernails on Chalkboard
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(12); //Serial.println("Scary 2 should be playing");
+      myDFPlayer.playMp3Folder(12); //Serial.println("Fingernails on Chalkboardshould be playing");
       bt_command = " ";
     } 
 
-    if(bt_command=="79"){//byte version of O Scary 3
+    if(bt_command=="79"){//byte version of O Monkeys
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(13); //Serial.println("Scary 3 should be playing");
+      myDFPlayer.playMp3Folder(13); //Serial.println("Monkeys should be playing");
       bt_command = " ";
     } 
 
@@ -263,21 +263,21 @@ void loop() {
       bt_command = " ";
     } 
 
-    if(bt_command=="86"){//byte version of V Talk 1
+    if(bt_command=="86"){//byte version of V See you later alligator
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(20); //Serial.println("Talk 1 should be playing");
+      myDFPlayer.playMp3Folder(20); //Serial.println("See you later alligator should be playing");
       bt_command = " ";
     } 
 
-    if(bt_command=="87"){//byte version of W Talk 2
+    if(bt_command=="87"){//byte version of W Come here, don't be scared
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(21); //Serial.println("Talk 2 should be playing");
+      myDFPlayer.playMp3Folder(21); //Serial.println("Come here, don't be scaredshould be playing");
       bt_command = " ";
     } 
 
-    if(bt_command=="88"){//byte version of X Talk 3
+    if(bt_command=="88"){//byte version of X Feed Me
       myDFPlayer.pause();
-      myDFPlayer.playMp3Folder(22); //Serial.println("Talk 3 should be playing");
+      myDFPlayer.playMp3Folder(22); //Serial.println("Feed Me should be playing");
       bt_command = " ";
     } 
 
