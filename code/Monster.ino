@@ -20,7 +20,7 @@ const int RELAY_FOG = 5;     //Pin for Fog machine remote
 const int PIN_LASER = 6;     // Pin for laser eyes
 const int RELAY_LIGHT_RED = 7;   //Pin for red lightbulb
 
-//const int PIN_SOUND = 8;   //Pin for sound
+
 const int PIR_PIN = 10;   // PIR input Pin
 
 
@@ -180,157 +180,131 @@ void loop() {
     
     //sounds 
     if(bt_command=="72"){//byte version of H Laugh
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(6); //Serial.println("Laugh should be playing");
       bt_command = " ";
     }   
 
     if(bt_command=="73"){//byte version of I Chains
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(7); //Serial.println("Chains should be playing");
       bt_command = " ";
     }     
 
     if(bt_command=="74"){//byte version of J Ghosts
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(8); //Serial.println("Ghosts should be playing");
       bt_command = " ";
     }   
 
     if(bt_command=="75"){//byte version of K Moaning
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(9); //Serial.println("Moaning should be playing");
       bt_command = " ";
     }   
 
     if(bt_command=="76"){//byte version of L Monster Growl!
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(10); //Serial.println("Monster Growl should be playing");
       bt_command = " ";
     }   
 
     if(bt_command=="77"){//byte version of M Dog Growl
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(11); //Serial.println("Dog Growl should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="78"){//byte version of N Fingernails on Chalkboard
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(12); //Serial.println("Fingernails on Chalkboardshould be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="79"){//byte version of O Monkeys
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(13); //Serial.println("Monkeys should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="80"){//byte version of P Happy Halloween
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(14); //Serial.println("Happy Halloween should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="81"){//byte version of Q Welcome
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(15); //Serial.println("Welcome should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="82"){//byte version of R Trick or Treat
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(16); //Serial.println("Trick or Treat should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="83"){//byte version of S Treat it is
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(17); //Serial.println("Treat it is should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="84"){//byte version of T I see you
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(18); //Serial.println("I see you should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="85"){//byte version of U Bye
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(19); //Serial.println("Bye should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="86"){//byte version of V See you later alligator
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(20); //Serial.println("See you later alligator should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="87"){//byte version of W Come here, don't be scared
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(21); //Serial.println("Come here, don't be scaredshould be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="88"){//byte version of X Feed Me
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(22); //Serial.println("Feed Me should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="89"){//byte version of Y Monster Mash
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(23); //Serial.println("Monster Mash should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="90"){//byte version of Z This is Halloween
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(24); //Serial.println("This is Halloween should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="97"){//byte version of a Toccata and Fugue in D minor
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(25); //Serial.println("Toccata and Fugue in D minor should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="98"){//byte version of b Danse Macabre
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(26); //Serial.println("Danse Macabre should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="99"){//byte version of c In the Hall of Mountain King
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(27); //Serial.println("In the Hall of the Mountain King should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="48"){//byte version of 0 Night on Bald Mountain
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(28); //Serial.println("Night on Bald Mountain should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="55"){//byte version of 7 Dies Irae
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(29); //Serial.println("Dies Irae should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="56"){//byte version of 8 Phantom of the Opera
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(30); //Serial.println("Phantom of the Opera should be playing");
       bt_command = " ";
     } 
 
     if(bt_command=="57"){//byte version of 9 Stranger Things
-      myDFPlayer.pause();
       myDFPlayer.playMp3Folder(31); //Serial.println("Stranger Things should be playing");
       bt_command = " ";
     } 
@@ -424,7 +398,7 @@ void stopAll(){
 
 
 void FanSpin(){
-  if((millis() - milStartFan) > 1050){digitalWrite(RELAY_FAN, HIGH); runFan = 0;} //OFF
+  if((millis() - milStartFan) > 1050){digitalWrite(RELAY_FAN, HIGH);} //OFF
   else if((millis() - milStartFan) > 0){digitalWrite(RELAY_FAN, LOW); } //ON
   else{digitalWrite(RELAY_FAN, HIGH);} //OFF
 }
@@ -493,8 +467,8 @@ void LightFlashRed(){
 
 
 void LidFlap(){
-  if((millis() - milStartMotor) > 100){digitalWrite(RELAY_MOTOR, HIGH); runMotor = 0;} //OFF
-  else if((millis() - milStartMotor) > 0){digitalWrite(RELAY_MOTOR, LOW); } //ON
+  if((millis() - milStartMotor) > 100){digitalWrite(RELAY_MOTOR, HIGH); runMotor = 2;} //OFF
+  else if((millis() - milStartMotor) > 0){digitalWrite(RELAY_MOTOR, LOW);} //ON
   else{digitalWrite(RELAY_MOTOR, HIGH); runMotor = 0;} //OFF
 }
 
@@ -522,6 +496,30 @@ Creating the scenes
 void scene1(){
   if((millis() - milStartScene) > 12000){Serial.println("Scene 1 Completed"); runScene1 = 0; stopAll(); } //OFF
   else if((millis() - milStartScene) > 10500 ){}//{Serial.println("6th pause");} // +1500
+  else if((millis() - milStartScene) > 9500 ){startFan();
+                                              if(runMotor==0){runMotor=1; startMotor();} else{};}
+  else if((millis() - milStartScene) > 8500 ){runMotor=0;}//{Serial.println("5th pause");} // +1000
+  else if((millis() - milStartScene) > 7500 ){startFog();
+                                              if(runMotor==0){runMotor=1; startMotor();} else{};}
+  else if((millis() - milStartScene) > 6000 ){runMotor=0;}//{Serial.println("4th pause");} // +1500
+  else if((millis() - milStartScene) > 5000 ){if(runMotor==0){runMotor=1; startMotor();} else{};}
+  else if((millis() - milStartScene) > 4500 ){runMotor=0;}//{Serial.println("3rd pause");} // +500
+  else if((millis() - milStartScene) > 3500 ){if(runMotor==0){runMotor=1; startMotor();} else{};
+                                              startFog(); startLaser(); startFan();} //
+  else if((millis() - milStartScene) > 2500 ){runMotor=0;}//{Serial.println("2nd pause");} // +1000
+  else if((millis() - milStartScene) > 1500){if(runMotor==0){runMotor=1; startMotor();} else{};
+                                             if(runSound==0){runSound=1;startSound();}else{};}
+  else if((millis() - milStartScene) > 1000 ){runMotor=0;}//{Serial.println("1st pause");} // +500
+  else if((millis() - milStartScene) > 0){startFog(); 
+                                          if(runMotor==0){runMotor=1; startMotor();} else{};
+                                          startLightGreen(); 
+                                          startLightRed();} //Fog, Lid, Flash
+  else{Serial.println("else stop"); runScene1 = 0; stopAll();} //OFF
+}
+
+void scene2(){
+    if((millis() - milStartScene) > 12000){Serial.println("Scene 1 Completed"); runScene1 = 0; stopAll(); } //OFF
+  else if((millis() - milStartScene) > 10500 ){}//{Serial.println("6th pause");} // +1500
   else if((millis() - milStartScene) > 9500 ){startFan(); startMotor();}
   else if((millis() - milStartScene) > 8500 ){}//{Serial.println("5th pause");} // +1000
   else if((millis() - milStartScene) > 7500 ){startFog(); startMotor();}
@@ -532,28 +530,8 @@ void scene1(){
   else if((millis() - milStartScene) > 2500 ){}//{Serial.println("2nd pause");} // +1000
   else if((millis() - milStartScene) > 1500){startMotor();if(runSound==0){runSound=1;startSound();}else{};}
   else if((millis() - milStartScene) > 1000 ){}//{Serial.println("1st pause");} // +500
-  else if((millis() - milStartScene) > 0){startFog(); 
-                                          if(runMotor==0){runMotor=1; startMotor();} else{};
-                                          startLightGreen(); 
-                                          startLightRed();} //Fog, Lid, Flash
+  else if((millis() - milStartScene) > 0){startFog(); startMotor();startLightGreen(); startLightRed();} //Fog, Lid, Flash
   else{Serial.println("else stop"); runScene1 = 0; stopAll();} //OFF
-}
-
-void scene2(){
-  if((millis() - milStartScene) > 12000){stopAll(); runScene2 = 0;} //OFF
-  else if((millis() - milStartScene) > 10500 ){} // +1500
-  else if((millis() - milStartScene) > 9500 ){startFan(); startMotor();  (milScene + 1000);}
-  else if((millis() - milStartScene) > 8500 ){} // +1000
-  else if((millis() - milStartScene) > 7500 ){startFog(); startMotor();  (milScene + 1000);}
-  else if((millis() - milStartScene) > 6000 ){} // +1500
-  else if((millis() - milStartScene) > 5000 ){startMotor(); (milScene + 1000);}
-  else if((millis() - milStartScene) > 4500 ){} // +500
-  else if((millis() - milStartScene) > 3500 ){startMotor(); startFog(); startLaser(); startFan(); (milScene + 1000);} //
-  else if((millis() - milStartScene) > 2500 ){} // +1000
-  else if((millis() - milStartScene) > 1500){startMotor(); (milScene + 1000);}
-  else if((millis() - milStartScene) > 1000 ){} // +500
-  else if((millis() - milStartScene) > 0){startFog(); startMotor(); startLightGreen(); startLightRed();(milScene + 1000);} //Fog, Lid, Flash
-  else{stopAll(); runScene2 = 0;} //OFF
 }
 
 void scene3(){
