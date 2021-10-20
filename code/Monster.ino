@@ -87,7 +87,8 @@ void setup() {
   Serial.println(F("DFRobot DFPlayer Mini Demo"));
   Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
 
-  /**/
+  /*Need to have the true false to avoid having to manually restart Arduino to get it to load with the sketch the first time
+  Without this you will have to manually have access to the Arduino on every reboot - super annoying*/
   if (!myDFPlayer.begin(mySoftwareSerial, true, false)) {  //Use softwareSerial to communicate with mp3 module.
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
