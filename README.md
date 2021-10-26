@@ -8,7 +8,7 @@ To make halloween a little more fun I wanted to build something that would make 
 
 <img src="./images/box_chains_front.jpg" height=250><br>
 
-Video of the final version<br>
+Video of the final version working<br>
 [![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)<br>
 
 ## Building the box
@@ -68,8 +68,10 @@ For the fog machine I bought the cheapest one I could find that had a remote. I 
 
 <img src="./images/inside2.jpg" height=250><img src="./images/inside3.jpg" height=250><img src="./images/back.jpg" height=250><br>
 
+Video of the inside of the box<br>
 [![Inside the box](http://img.youtube.com/vi/RGa3m-vAMS4/0.jpg)](https://youtu.be/RGa3m-vAMS4)
 
+Another view of the box without <br>
 [![Running without fog](http://img.youtube.com/vi/UqhXjQ49fxM/0.jpg)](https://youtu.be/UqhXjQ49fxM)
 
 
@@ -107,12 +109,16 @@ I assigned one letter to each of the buttons to send as small of information as 
 One key thing to note is that when you send a string from the app it converts it to a byte. Sending bytes from the app to the arduino wasn't working but sending text was so I stuck with text. To save memory in the arduino code I converted the string to byte outside of the code and just read the bytes coming in.
 
 ## Putting it All Together
-Putting this all together 
+Putting this all together was pretty simple. I used a lot of hot glue to keep the wires on the breadboard and did some cable management. I used a cheap plastic container to keep the fog and any falling debris off the core electronics.
 
+
+1- Video of box at night<br>
 [![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)
 
+2- Video of box at night<br>
 [![Working at night](http://img.youtube.com/vi/RidE3sDuHxQ/0.jpg)](https://youtu.be/RidE3sDuHxQ)
 
+3- Video of box at night<br>
 [![Working at night](http://img.youtube.com/vi/QSujMbqDQ2I/0.jpg)](https://youtu.be/QSujMbqDQ2I)
 
 
