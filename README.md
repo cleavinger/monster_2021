@@ -2,7 +2,7 @@
 
 <img src="./images/monster_icon.png" height=250>
 
-This is my take on a monster in a box. I had a brilliant idea and when I searched I saw so had 100's of others. This is my take on a monster in a box with a lot of thoughts and influence from a variety of projects.
+This is my take on a monster in a box. I thought I had a brilliant idea to build a monster in a box and so I searched found that 100's of others also had the brilliant idea. So maybe this isn't super unique but it was great to get ideas and change my approach seeing some amazing builds out there. This is my take on a monster in a box with a lot of thoughts and influence from a variety of projects.
 
 To make halloween a little more fun I wanted to build something that would make people smile with fog, lights, lasers, sounds, and shaking. I wanted to this to be able to run autonomously or controlled via an app to let people control it remotely.
 
