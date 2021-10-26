@@ -52,7 +52,7 @@ I made the mistake initially of building the box like a box. I made it fit too t
 
 The wood was really heavy, my motors couldn't easily lift it up due to the weight. I would have changed the lid to a more light weight option to allow for more movement and slamming. While this box will hold up for years, it's  big and heavy.
 
-## The Hardware
+## Electronic Hardware
 Item list
    - Old Fan
    - Motor from old broken cordless drill (3D printed cam)
