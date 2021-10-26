@@ -1,9 +1,15 @@
 # Monster in a Box
-<img src="./images/box_chains_front.jpg" height=250><br>
+
+<img src="./images/monster_icon.png" height=250>
 
 This is my take on a monster in a box. I had a brilliant idea and when I searched I saw so had 100's of others. This is my take on a monster in a box with a lot of thoughts and influence from a variety of projects.
 
 To make halloween a little more fun I wanted to build something that would make people smile with fog, lights, lasers, sounds, and shaking. I wanted to this to be able to run autonomously or controlled via an app to let people control it remotely.
+
+<img src="./images/box_chains_front.jpg" height=250><br>
+
+Video of the final version<br>
+[![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)<br>
 
 ## Building the box
 
@@ -56,13 +62,11 @@ Item list
    - Practice guitar amp
    - 12V Power Supply
 
-I already had all the hardware from other projects or broken items except for the fog machine. The way I built 
+I already had all the hardware from other projects or broken items except for the fog machine. I decided to use a relay switch so I could plug in anything I wanted and mannage it more easily with a surge protector.
+
+For the fog machine I bought the cheapest one I could find that had a remote. I opened up the fog machine and the remote and saw that the remote was simply a switch to turn on the compressor. I didn't want to modify the remote by soldering or adjusting anything so I can use the fog machine for other things. I also wanted to make the arduino the controller so I could control everything through the program and one bluetooth connector.
 
 <img src="./images/inside2.jpg" height=250><img src="./images/inside3.jpg" height=250><img src="./images/back.jpg" height=250><br>
-
-
-
-
 
 [![Inside the box](http://img.youtube.com/vi/RGa3m-vAMS4/0.jpg)](https://youtu.be/RGa3m-vAMS4)
 
@@ -84,7 +88,9 @@ I already had all the hardware from other projects or broken items except for th
 
 
 ## The Arduino Code
+The code for the project is in the repo, [also linked here](code/Monster.ino)
 
+As I added more buttons and sound options I started running into some memory problems the longer the Monster in the Box was running it ran into bugs so I cut down the code to get to a manageable size with all of the variables. It's not elegant code, but it works. :)
 
 ## The App
 
@@ -101,9 +107,12 @@ I assigned one letter to each of the buttons to send as small of information as 
 One key thing to note is that when you send a string from the app it converts it to a byte. Sending bytes from the app to the arduino wasn't working but sending text was so I stuck with text. To save memory in the arduino code I converted the string to byte outside of the code and just read the bytes coming in.
 
 ## Putting it All Together
+Putting this all together 
+
+[![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)
 
 [![Working at night](http://img.youtube.com/vi/RidE3sDuHxQ/0.jpg)](https://youtu.be/RidE3sDuHxQ)
 
 [![Working at night](http://img.youtube.com/vi/QSujMbqDQ2I/0.jpg)](https://youtu.be/QSujMbqDQ2I)
 
-[![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)
+
