@@ -102,9 +102,8 @@ One key thing to note is that when you send a string from the app it converts it
 
 ## Putting it All Together
 
+[![Working at night](http://img.youtube.com/vi/RidE3sDuHxQ/0.jpg)](https://youtu.be/RidE3sDuHxQ)
 
 [![Working at night](http://img.youtube.com/vi/QSujMbqDQ2I/0.jpg)](https://youtu.be/QSujMbqDQ2I)
-
-[![Working at night](http://img.youtube.com/vi/RidE3sDuHxQ/0.jpg)](https://youtu.be/RidE3sDuHxQ)
 
 [![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)
