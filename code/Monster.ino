@@ -1,7 +1,7 @@
 
 /*
-If not connecting to a computer, after powering on you need to reset the board with the button to get it to work.
-It appears to be an issue with the DFRobot mp3 player and SoftwareSerial.h
+There was an initial issue where I had to power off and on the arduino every time due to the DFPlayer.
+It bothered me enough that I figured out how to fix it which is detailed below.
 */
 
 #include "Arduino.h"
@@ -19,15 +19,13 @@ const int RELAY_MOTOR = 4;   //Pin for DC Motor
 const int RELAY_FOG = 5;     //Pin for Fog machine remote
 const int PIN_LASER = 6;     // Pin for laser eyes
 const int RELAY_LIGHT_RED = 7;   //Pin for red lightbulb
-
-
 const int PIR_PIN = 10;   // PIR input Pin
-
-
 
 String bt_command; //string for command from bluetooth
 
-/*Setup times*/
+/*Setup timing variables.
+Instead of using delays and only running one command at a time I changed this to run based on the internal clock timing
+*/
 unsigned long milCurrent;
 unsigned long milStartFan;
 unsigned long milStartFog;
@@ -70,7 +68,7 @@ void setup() {
   pinMode(PIR_PIN, INPUT);
    
 
-  /*Set everything to off*/
+  /*Set everything to off initially*/
   digitalWrite(RELAY_FAN, HIGH);    //relay is set to High for off
   digitalWrite(RELAY_FOG, HIGH);    //relay is set to High for off
   digitalWrite(PIN_LASER, LOW);     //digital pin is set to Low for off
@@ -79,7 +77,7 @@ void setup() {
   digitalWrite(RELAY_MOTOR, HIGH);  //relay is set to High for off
    
 
-  bt_command == " "; //assign empty string
+  bt_command == " "; //assign empty string for bluetooth command
   mySoftwareSerial.begin(9600); //serial for mp3 module
   Serial.begin(9600); //start the serial for bluetooth
 
@@ -104,7 +102,8 @@ void setup() {
 }
 
 void loop() {
-  /*check if button was pusehd from the app*/
+  /*check if button was pushed from the app
+  As I added buttons this grew, I would redo this to be more elegant if it weren't working and an ad-hoc project*/
   if(Serial.available() > 0 ){
     bt_command=Serial.read();
     Serial.println(bt_command);
@@ -316,21 +315,21 @@ void loop() {
 
 
 
-  /*run functions if active*/
+  /*This checks to see if a function is active and will run that function*/
   if(runFan == 1){FanSpin();}
   if(runFog == 1){FogMe();}
   if(runLaser == 1){LaserEyes();}
   if(runLightGreen == 1){LightFlashGreen();}
   if(runLightRed == 1){LightFlashRed();}
   if(runMotor == 1){LidFlap();}
-  if(runSound == 1){MakeNoise();} //This isn't a trigger, we have to see how this works
+  if(runSound == 1){MakeNoise();} 
   if(runScene1 == 1){scene1();}
   if(runScene2 == 1){scene2();}
   if(runScene3 == 1){scene3();}
   if(runSleep == 1){Sleeper();}
 
 
-/*Motion detection*/
+/*If motion detection is turned on then this will run based on movement captured by the PIR*/
   pirStatus = digitalRead(PIR_PIN); 
   //if(pirStatus == HIGH){Serial.println("Motion detected");}
   //if(Motion_Mode == true && pirStatus== HIGH){Serial.println("Motion mode on and motion detected");}
@@ -364,7 +363,7 @@ void loop() {
 
 
 
-/* define start functions */
+/* define functions to start the actions*/
 void startFan(){runFan = 1; milStartFan = (millis() - 1); Serial.println("Spin that Fan");}
 void startFog(){runFog = 1; milStartFog = (millis() - 1); Serial.println("Fog Me");}
 void startLaser(){runLaser = 1; milStartLaser = (millis() - 1); Serial.println("Laser Eyes!");}
@@ -381,7 +380,7 @@ void startScene3(){runScene1 = 0; runScene2 = 0; runScene3 = 1; milStartScene = 
 
 
 
-/* define stop functions */
+/* define stop functions, this will stop all actions*/
 void stopAll(){
   runFan = 0; digitalWrite(RELAY_FAN, HIGH);
   runFog = 0; digitalWrite(RELAY_FOG, HIGH);
@@ -399,19 +398,21 @@ void stopAll(){
 
 
 
-
+//spin the fan, used for noise and to move the fog
 void FanSpin(){
   if((millis() - milStartFan) > 1050){digitalWrite(RELAY_FAN, HIGH);} //OFF
   else if((millis() - milStartFan) > 0){digitalWrite(RELAY_FAN, LOW); } //ON
   else{digitalWrite(RELAY_FAN, HIGH);} //OFF
 }
 
+//triggers the fog, only will send fog for 0.5 seconds, less than this doesn't produce much, more than this produces too much too fast
 void FogMe(){
   if((millis() - milStartFog) > 500){digitalWrite(RELAY_FOG, HIGH); runFog = 0;} //OFF
   else if((millis() - milStartFog) > 0){digitalWrite(RELAY_FOG, LOW); } //ON
   else{digitalWrite(RELAY_FOG, HIGH); runFog = 0;} //OFF
 }
 
+//Turn on the lasers and make them blink, better idea in my mind than with execution
 void LaserEyes(){
   if((millis() - milStartLaser) > 5000){digitalWrite(PIN_LASER, LOW); runLaser = 0;} //OFF
   else if((millis() - milStartLaser) > 4000){digitalWrite(PIN_LASER, HIGH);} //ON
@@ -424,6 +425,7 @@ void LaserEyes(){
   else{digitalWrite(PIN_LASER, LOW); runLaser = 0;} //OFF
 }
 
+//flash the green light
 void LightFlashGreen(){
   if((millis() - milstartLightGreen) > 3500){digitalWrite(RELAY_LIGHT_GREEN, HIGH); runLightGreen = 0;} //OFF
   else if((millis() - milstartLightGreen) > 3350){digitalWrite(RELAY_LIGHT_GREEN, LOW);} //ON
@@ -446,6 +448,7 @@ void LightFlashGreen(){
   else{digitalWrite(RELAY_LIGHT_GREEN, HIGH); runLightGreen = 0;} //OFF
 }
 
+//flash the red lights
 void LightFlashRed(){
   if((millis() - milstartLightRed) > 3400){digitalWrite(RELAY_LIGHT_RED, HIGH); runLightRed = 0;} //OFF
   else if((millis() - milstartLightRed) > 3250){digitalWrite(RELAY_LIGHT_RED, LOW);} //ON
@@ -468,21 +471,21 @@ void LightFlashRed(){
   else{digitalWrite(RELAY_LIGHT_RED, HIGH); runLightRed = 0;} //OFF
 }
 
-
+//initially this was meant to lift the lid, the cam kept breaking so now it shakes the lid and makes noise
 void LidFlap(){
   if((millis() - milStartMotor) > 100){digitalWrite(RELAY_MOTOR, HIGH); runMotor = 2;} //OFF
   else if((millis() - milStartMotor) > 0){digitalWrite(RELAY_MOTOR, LOW);} //ON
   else{digitalWrite(RELAY_MOTOR, HIGH); runMotor = 0;} //OFF
 }
 
-
+//trigger a sound from the mp3 folder
 void MakeNoise(){
   if((millis() - milStartSound) > 6000){myDFPlayer.pause(); runSound = 0;} //Stop Sound
   else if((millis() - milStartSound) > 0){myDFPlayer.playMp3Folder(int_song); Serial.println("song should be playing");runSound=2;} //Play Sound runSound set to 2 so it won't keep restarting
   else{myDFPlayer.pause(); runSound = 0;} //Stop Sound
 }
 
-
+//This is a rest mode where you hear a sleeping sound, works well when no motion is detected
 void Sleeper(){
   if((millis() - milStartSleep) > 60000){Serial.println("Slept for awhile"); myDFPlayer.pause(); stopAll(); startFog(); startSleep();} //restart the sleeping sound
   else if((millis() - milStartSleep) > 0){myDFPlayer.playMp3Folder(4); Serial.println("song should be playing");runSleep = 2;} //Play Sound runSound set to 2 so it won't keep restarting
@@ -492,10 +495,10 @@ void Sleeper(){
 
 
 /*
-Creating the scenes
+Creating the scenes, putting together different actions
 */
 
-//Sound keeps restarting, need to only start if not started
+//To build a scene work backwards from the time to define the actions, keep pauses vs just running everything at once
 void scene1(){
   int_song = 3;
   if((millis() - milStartScene) > 12000){Serial.println("Scene 1 Completed"); runScene1 = 0; stopAll(); } //OFF
