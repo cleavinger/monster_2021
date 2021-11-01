@@ -1,15 +1,17 @@
 # Monster in a Box
 
-<img src="./images/monster_icon.png" height=250>
+<img src="./images/monster_icon.png" height=250><img src="./images/box_chains_front.jpg" height=250><br>
 
 This is my take on a monster in a box. I thought I had a brilliant idea to build a monster in a box and so I searched found that 100's of others also had the brilliant idea. So maybe this isn't super unique but it was great to get ideas and change my approach seeing some amazing builds out there. This is my take on a monster in a box with a lot of thoughts and influence from a variety of projects.
 
 To make halloween a little more fun I wanted to build something that would make people smile with fog, lights, lasers, sounds, and shaking. I wanted to this to be able to run autonomously or controlled via an app to let people control it remotely.
 
-<img src="./images/box_chains_front.jpg" height=250><br>
-
-Video of the final version working<br>
+### [Video of the final version working](https://youtu.be/urBdfAWe6G0)<br>
 [![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)<br>
+
+
+### [Video of a few reactions from Halloween](https://www.youtube.com/watch?v=nRWVNCnALiA)<br>
+[![Reaction Video](http://img.youtube.com/vi/nRWVNCnALiA/0.jpg)](https://youtu.be/nRWVNCnALiA)<br>
 
 ## Building the box
 
@@ -68,10 +70,10 @@ For the fog machine I bought the cheapest one I could find that had a remote. I 
 
 <img src="./images/inside2.jpg" height=250><img src="./images/inside3.jpg" height=250><img src="./images/back.jpg" height=250><br>
 
-Video of the inside of the box<br>
+### [Video of the inside of the box](https://www.youtube.com/watch?v=RGa3m-vAMS4)<br>
 [![Inside the box](http://img.youtube.com/vi/RGa3m-vAMS4/0.jpg)](https://youtu.be/RGa3m-vAMS4)
 
-Another view of the box without <br>
+### [Another video of the box](https://www.youtube.com/watch?v=UqhXjQ49fxM)<br>
 [![Running without fog](http://img.youtube.com/vi/UqhXjQ49fxM/0.jpg)](https://youtu.be/UqhXjQ49fxM)
 
 
@@ -111,14 +113,13 @@ One key thing to note is that when you send a string from the app it converts it
 ## Putting it All Together
 Putting this all together was pretty simple. I used a lot of hot glue to keep the wires on the breadboard and did some cable management. I used a cheap plastic container to keep the fog and any falling debris off the core electronics.
 
-
-1- Video of box at night<br>
+### [1- Video of box at night](https://www.youtube.com/watch?v=urBdfAWe6G0)<br>
 [![Working at night](http://img.youtube.com/vi/urBdfAWe6G0/0.jpg)](https://youtu.be/urBdfAWe6G0)
 
-2- Video of box at night<br>
+### [2- Video of box at night](https://www.youtube.com/watch?v=RidE3sDuHxQ)<br>
 [![Working at night](http://img.youtube.com/vi/RidE3sDuHxQ/0.jpg)](https://youtu.be/RidE3sDuHxQ)
 
-3- Video of box at night<br>
+### [3- Video of box at night](https://www.youtube.com/watch?v=QSujMbqDQ2I)<br>
 [![Working at night](http://img.youtube.com/vi/QSujMbqDQ2I/0.jpg)](https://youtu.be/QSujMbqDQ2I)
 
 
